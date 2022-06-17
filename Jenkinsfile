@@ -52,7 +52,7 @@ pipeline {
 			steps{
 			// premitive way of building docker is =====	"docker build -t thilinarat/currency-exchange-devops:$env.BUILD_TAG"
 				script{
-					dockerImage = docker.build("docker build -t thilinarat/currency-exchange-devops:${env.BUILD_TAG}")
+					dockerImage = docker.build("thilinarat/currency-exchange-devops:${env.BUILD_TAG}")
 				}
 			}
 		}
