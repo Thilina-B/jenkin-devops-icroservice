@@ -21,21 +21,26 @@ pipeline {
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
 	stages{
-		stage('Build'){
+		stage('Checkout'){
 			steps{
 				sh 'mvn --version'
 				sh 'docker version'
 				echo "Build" 
 			}
 		}
-			stage('Test'){
+		stage('Compile'){
 			steps{
-				echo "Test"
+				sh "mvn clean compile"
 			}
 		}
-			stage('Intregration Test'){
+		stage('Test'){
 			steps{
-				echo "Intregration Test"
+				sh "mvn test"
+			}
+		}
+		stage('Intregration Test'){
+			steps{
+				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
 	}
